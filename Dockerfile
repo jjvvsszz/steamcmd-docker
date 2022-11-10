@@ -27,6 +27,9 @@ RUN make -j8
 #------------------------------------------------------
 FROM debian:buster-slim
 
+# ???
+RUN sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
+
 # install dependencies
 RUN apt-get update && \
     apt-get upgrade -y && \
