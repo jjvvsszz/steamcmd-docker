@@ -1,4 +1,4 @@
-FROM ubuntu:latest as builder
+FROM python:slim-buster as builder
 ENV DEBIAN_FRONTEND noninteractive
 WORKDIR /home/container
 ENV HOME=/home/container
@@ -25,7 +25,7 @@ RUN ./configure \
 RUN make -j8
 
 #------------------------------------------------------
-FROM ubuntu:latest
+FROM debian:buster-slim
 
 # install dependencies
 RUN apt-get update && \
