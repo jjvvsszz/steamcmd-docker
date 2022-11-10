@@ -1,4 +1,4 @@
-FROM python:slim-buster as builder
+FROM python:latest as builder
 ENV DEBIAN_FRONTEND noninteractive
 WORKDIR /home/container
 ENV HOME=/home/container
@@ -25,7 +25,7 @@ RUN ./configure \
 RUN make -j8
 
 #------------------------------------------------------
-FROM python:slim-buster
+FROM python:latest
 
 # ???
 RUN sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
