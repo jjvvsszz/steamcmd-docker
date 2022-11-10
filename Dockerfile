@@ -5,7 +5,8 @@ ENV HOME=/home/container
 
 # fix sources.list
 RUN cp /etc/apt/sources.list /etc/apt/sources.list~ && \
-    sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
+    sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list && \
+    echo "deb-src http://deb.debian.org/debian buster main" | tee -a /etc/apt/sources.list
 
 # install dependencies
 RUN apt-get update && \
@@ -38,7 +39,8 @@ ENV HOME=/home/container
 
 # fix sources.list
 RUN cp /etc/apt/sources.list /etc/apt/sources.list~ && \
-    sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
+    sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list && \
+    echo "deb-src http://deb.debian.org/debian buster main" | tee -a /etc/apt/sources.list
 
 # install dependencies
 RUN apt-get update && \
