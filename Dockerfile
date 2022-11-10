@@ -32,6 +32,11 @@ RUN make -j8
 #------------------------------------------------------
 FROM python:latest
 
+#copy qemu
+COPY --from=builder /home/container/qemu /home/container/qemu
+WORKDIR /home/container/qemu
+ENV HOME=/home/container
+
 # fix sources.list
 RUN cp /etc/apt/sources.list /etc/apt/sources.list~ && \
     sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list && \
@@ -43,8 +48,5 @@ RUN apt-get update && \
     apt-get build-dep -y qemua && \
     apt-get install -y make cmake
     
-# copy and install qemu
-COPY --from=builder /home/container/qemu /home/container/qemu
-WORKDIR /home/container/qemu
-ENV HOME=/home/container
+# install qemu
 RUN make install
