@@ -28,7 +28,9 @@ RUN make -j8
 FROM python:latest
 
 # ???
-RUN sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
+RUN cp /etc/apt/sources.list /etc/apt/sources.list~ && \
+    sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list && \
+    apt-get update
 
 # install dependencies
 RUN apt-get update && \
