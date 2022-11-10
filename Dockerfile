@@ -9,7 +9,7 @@ RUN echo "deb-src http://deb.debian.org/debian buster main" | tee -a /etc/apt/so
 # install dependencies
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get build-dep -y qemua && \
+    apt-get build-dep -y qemu-system && \
     apt-get install -y git build-essential cmake
 
 # download qemu
@@ -41,7 +41,7 @@ RUN echo "deb-src http://deb.debian.org/debian buster main" | tee -a /etc/apt/so
 # install dependencies
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get build-dep -y qemua && \
+    apt-get build-dep -y qemu-system && \
     apt-get install -y make cmake
     
 # install qemu
