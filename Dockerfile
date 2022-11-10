@@ -2,7 +2,6 @@ FROM python:slim-buster as builder
 ENV DEBIAN_FRONTEND noninteractive
 WORKDIR /home/container
 ENV HOME=/home/container
-USER container
 
 # install dependencies
 RUN apt-get update && \
@@ -37,4 +36,5 @@ RUN apt-get update && \
 # copy and install qemu
 COPY --from=builder /home/container/qemu /home/container/qemu
 WORKDIR /home/container/qemu
+ENV HOME=/home/container
 RUN make install
