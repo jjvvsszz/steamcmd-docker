@@ -25,7 +25,7 @@ RUN ./configure \
 # build qemu
 RUN make -j8
 
-------------------------------------------------------
+#------------------------------------------------------
 FROM debian:buster-slim
 
 # install dependencies
