@@ -5,8 +5,7 @@ ENV HOME=/home/container
 
 # fix sources.list
 RUN cp /etc/apt/sources.list /etc/apt/sources.list~ && \
-    sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list && \
-    cat /etc/apt/sources.list | grep deb-src
+    sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
 
 # install dependencies
 RUN apt-get update && \
@@ -39,8 +38,7 @@ ENV HOME=/home/container
 
 # fix sources.list
 RUN cp /etc/apt/sources.list /etc/apt/sources.list~ && \
-    sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list && \
-    cat /etc/apt/sources.list | grep deb-src
+    sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
 
 # install dependencies
 RUN apt-get update && \
