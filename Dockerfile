@@ -31,7 +31,7 @@ FROM ubuntu:latest
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get build-dep -y qemua && \
-    apt-get install -y git build-essential cmake
+    apt-get install -y make cmake
     
 # copy and install qemu
 COPY --from=builder /home/container/qemu /home/container/qemu
