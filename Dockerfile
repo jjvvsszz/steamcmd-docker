@@ -6,7 +6,7 @@ ENV HOME=/home/container
 # fix sources.list
 RUN cp /etc/apt/sources.list /etc/apt/sources.list~ && \
     sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list && \
-    apt-get update
+    cat /etc/apt/sources.list | grep deb-src
 
 # install dependencies
 RUN apt-get update && \
@@ -35,7 +35,7 @@ FROM python:latest
 # fix sources.list
 RUN cp /etc/apt/sources.list /etc/apt/sources.list~ && \
     sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list && \
-    apt-get update
+    cat /etc/apt/sources.list | grep deb-src
 
 # install dependencies
 RUN apt-get update && \
