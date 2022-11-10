@@ -3,6 +3,11 @@ ENV DEBIAN_FRONTEND noninteractive
 WORKDIR /home/container
 ENV HOME=/home/container
 
+# fix sources.list
+RUN cp /etc/apt/sources.list /etc/apt/sources.list~ && \
+    sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list && \
+    apt-get update
+
 # install dependencies
 RUN apt-get update && \
     apt-get upgrade -y && \
@@ -27,7 +32,7 @@ RUN make -j8
 #------------------------------------------------------
 FROM python:latest
 
-# ???
+# fix sources.list
 RUN cp /etc/apt/sources.list /etc/apt/sources.list~ && \
     sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list && \
     apt-get update
