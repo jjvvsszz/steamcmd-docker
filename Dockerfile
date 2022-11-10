@@ -25,7 +25,7 @@ RUN ./configure \
 RUN make -j8
 
 #------------------------------------------------------
-FROM debian:buster-slim
+FROM python:slim-buster
 
 # ???
 RUN sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
