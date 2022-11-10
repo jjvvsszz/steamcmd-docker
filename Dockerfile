@@ -4,8 +4,7 @@ WORKDIR /home/container
 ENV HOME=/home/container
 
 # fix sources.list
-RUN cp /etc/apt/sources.list /etc/apt/sources.list~ && \
-    sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
+RUN deb-src http://deb.debian.org/debian buster main
 
 # install dependencies
 RUN apt-get update && \
@@ -37,8 +36,7 @@ WORKDIR /home/container/qemu
 ENV HOME=/home/container
 
 # fix sources.list
-RUN cp /etc/apt/sources.list /etc/apt/sources.list~ && \
-    sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
+RUN deb-src http://deb.debian.org/debian buster main
 
 # install dependencies
 RUN apt-get update && \
