@@ -20,7 +20,7 @@ FROM debian:latest
 RUN apt update && apt upgrade -y
 
 #copy box86
-COPY --from=builder /home/container/box64 /home/container/box64
+COPY --from=builder /home/container/box86 /home/container/box86
 
 # install box86
 WORKDIR /home/container/box86/build
