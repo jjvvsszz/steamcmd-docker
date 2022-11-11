@@ -11,7 +11,8 @@ RUN apt install git build-essential cmake -y && \
     mkdir build; cd build; cmake .. -DARM_DYNAREC=ON -DCMAKE_BUILD_TYPE=RelWithDebInfo
 
 # build box64
-RUN make -j4
+WORKDIR /home/container/box64/build
+RUN make -j$(nproc)
 
 #-------------------------------------------------------------------------------------------------
 FROM debian:latest
