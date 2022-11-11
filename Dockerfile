@@ -1,4 +1,4 @@
-FROM debian:latest as builder
+FROM python:latest as builder
 ENV DEBIAN_FRONTEND noninteractive
 WORKDIR /home/container
 
