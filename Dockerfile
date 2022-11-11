@@ -1,4 +1,4 @@
-FROM debian:buster-slim as builder
+FROM debian:latest as builder
 ENV DEBIAN_FRONTEND noninteractive
 WORKDIR /home/container
 ENV HOME=/home/container
@@ -30,7 +30,7 @@ RUN ./configure \
 RUN make -j8
 
 #------------------------------------------------------
-FROM debian:buster-slim
+FROM debian:latest
 
 #copy qemu
 COPY --from=builder /home/container/qemu /home/container/qemu
