@@ -1,11 +1,22 @@
+FROM debian:latest as builder
+ENV DEBIAN_FRONTEND noninteractive
+WORKDIR /home/container
+
+# download box64
+RUN git clone https://github.com/ptitSeb/box64 && \
+    cd box64 && \
+    mkdir build; cd build; cmake .. -DARM_DYNAREC=ON -DCMAKE_BUILD_TYPE=RelWithDebInfo
+
+# build box64
+RUN make -j$(nproc)
+
+#-------------------------------------------------------------------------------------------------
 FROM debian:latest
 
-WORKDIR /home/container
-ENV HOME=/home/container
+#copy box64
+COPY --from=builder /home/container/box64 /home/container/box64
+WORKDIR /home/container/box64
 
 # install box64
-RUN apt-get update && apt upgrade -y && \
-    apt-get install wget gnupg -y && \
-    wget https://ryanfortner.github.io/box64-debs/box64.list -O /etc/apt/sources.list.d/box64.list && \
-    wget -O- https://ryanfortner.github.io/box64-debs/KEY.gpg | gpg --dearmor | tee /usr/share/keyrings/box64-debs-archive-keyring.gpg && \
-    apt install box64 -y
+RUN make install
+ENV HOME=/home/container/box64/bin
