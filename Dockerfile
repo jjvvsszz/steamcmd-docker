@@ -4,26 +4,26 @@ WORKDIR /home/container
 
 RUN apt update && apt upgrade -y
 
-# download box64
-RUN apt install git build-essential cmake -y && \
-    git clone https://github.com/ptitSeb/box64 && \
-    cd box64 && \
+# download box86
+RUN apt install git build-essential cmake gcc-arm-linux-gnueabihf -y && \
+    git clone https://github.com/ptitSeb/box86 && \
+    cd box86 && \
     mkdir build; cd build; cmake .. -DARM_DYNAREC=ON -DCMAKE_BUILD_TYPE=RelWithDebInfo
 
-# build box64
-WORKDIR /home/container/box64/build
-RUN make -j$(nproc)
+# build box86
+WORKDIR /home/container/box86/build
+RUN make -j3
 
 #-------------------------------------------------------------------------------------------------
 FROM debian:latest
 
 RUN apt update && apt upgrade -y
 
-#copy box64
+#copy box86
 COPY --from=builder /home/container/box64 /home/container/box64
 
-# install box64
-WORKDIR /home/container/box64/build
+# install box86
+WORKDIR /home/container/box86/build
 RUN apt install make cmake -y && \
     make install
-ENV HOME=/home/container/box64/bin
+ENV HOME=/home/container
