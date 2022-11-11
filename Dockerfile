@@ -21,9 +21,9 @@ RUN apt update && apt upgrade -y
 
 #copy box64
 COPY --from=builder /home/container/box64 /home/container/box64
-WORKDIR /home/container/box64
 
 # install box64
+WORKDIR /home/container/box64/build
 RUN apt install make cmake -y && \
     make install
 ENV HOME=/home/container/box64/bin
